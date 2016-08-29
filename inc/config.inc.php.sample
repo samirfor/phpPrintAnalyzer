@@ -1,0 +1,115 @@
+<?
+/**universal
+ * Fichier contenant les informations globales de configuration du site
+ * 
+ * @author Thomas Pequet
+ * @version 1.0
+ */
+
+//Répertoire contenant les scripts de JpGraph
+$rep_jpgraph 			= 	"/var/www/jpgraph/src";
+
+// Tableau contenant les chemins des fichiers "page_log" 
+// ex: "/var/log/cups/page_log" (fichier local de log CUPS)
+// ou "http://xxxx:631/page_log" (fichier de log CUPS accessible pour le web - faire un lien: ln -s /var/log/cups/page_log /usr/share/cups/doc-root/)
+// ou "pipe:/usr/local/monscript argument1 argument2 ..." (fichier de log CUPS généré par un programme externe)
+$tab_fic_page_log		= 	array(
+							"/var/log/cups/page_log",
+//							"http://cups.xxxxx.com:631/page_log",
+//							"pipe:/usr/local/monscript argument1 argument2",
+					);
+
+// Serveur Web de CUPS		
+// ex: "http://cups.xxxxx.com:631"			
+$serveurWebCups			= 	"";
+					
+// Serveur LDAP (mettre à vide si pas d'utilisation de LDAP)
+// ex: "ldap.xxxxx.com"
+$serveurLdap 			= 	"";					
+// ex: "dc=toto"
+$racineLdap 			= 	"";		
+					
+// Listes des utilisateurs qui peuvent être regrouper ensemble
+// ex: Les impressions lancées par l'utilisateur "Administrateur" seront affectés à l'utilisateur "root"
+$tabUserRegroupe 	= 	array(
+							"remroot" 		=> "root",	
+							"Administrateur" 	=> "root",
+							"remroot" 		=> "root",
+							"SYSTEM" 		=> "root",
+							"" 			=> "???",
+				);
+
+// Listes des imprimantes qui peuvent être regrouper ensemble		
+// ex: Les impressions lancées sur l'imprimante "CanonIR3300" seront affectés à l'imprimante "LP01"
+$tabPrinterRegroupe	= 	array(
+//							"CanonIR3300"		=> "LP01",	
+				);			
+
+// Listes des imprimantes qui sont ignorées		
+// ex: Les impressions lancées sur l'imprimante "LP01" seront ignorées
+$tabPrinterIgnore	= 	array(
+							"LP01"	 		=> 1,
+				);
+			
+// Tableaux contenant les services de l'Entreprise pour regrouper les utilisateurs via LDAP	
+// ex: Afficher le service Informatique -> regrouper tous les utilisateurs qui sont dans le groupe primaire Informatique
+$tabServices 		= 	array(
+//							"informatique" 		=> 1,
+				);
+					
+// Tableau de couts en Euro par page A4 et par imprimante
+// ex: L'imprimante "LP01" aura un coup de 0.5 € par page A4 imprimée
+$tabCoutPageA4 		= 	array(
+//							"LP01" 			=> 0.5,
+					);
+
+/* --------------------------------------------------------------------------------------- */					
+					
+// Nom du site 
+$nomSite 			= 	"phpPrintAnalyzer"; 
+ 
+// Infos concernant le site 
+$versionSite 			= 	"1.2";					
+					
+// Extension des pages
+$extension 			= 	"php";
+ 
+// Langue du site
+if (($REGISTER_GLOBALS && !session_is_registered("langue")) || (!$REGISTER_GLOBALS && !isset($_SESSION["langue"]))) 
+{
+	// Langue par defaut
+	$langue = "FR";
+
+	if ($REGISTER_GLOBALS)
+		session_register("langue");
+	else
+		$_SESSION["langue"] = $langue;
+}
+if ($lang!="") 
+{
+	$langue = strtoupper($lang);
+	if (!$REGISTER_GLOBALS)
+		$_SESSION["langue"] = $langue;
+}
+unset($lang);
+
+// Définition et emplacements des fichiers par rapport à la racine du site
+$ficStyle 		= 	$rep_par_rapport_racine."style.css.".$extension;
+$ficScript 		= 	$rep_par_rapport_racine."script.js.".$extension;
+
+// Format de la date sur le site
+if ($langue == "EN") 
+{
+	$format_date_heure_sql 	= 	'YYYY-MM-DD à HH24:MI';
+	$format_date_sql 	= 	'YYYY-MM-DD';
+	$format_date_heure 	= 	'Y-m-d - H:i';
+	$format_date 		= 	'Y-m-d';
+} 
+else 
+{
+	$format_date_heure_sql 	= 	'DD-MM-YYYY à HH24:MI';
+	$format_date_sql 	= 	'DD-MM-YYYY';
+	$format_date_heure 	= 	'd-m-Y à H:i';
+	$format_date 		= 	'd-m-Y';
+}
+?>

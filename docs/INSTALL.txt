@@ -1,0 +1,18 @@
+phpPrintAnalyzer - Installation Guide
+----------------------------------------------------------------------------------------------------------------------------
+
+1 - Copy "/inc/config.inc.php.sample" to "/inc/config.inc.php"
+
+2 - Configure/Edit "/inc/config.inc.php":
+
+    -> Set the path of JpGraph Source in "$rep_jpgraph"
+    -> Set the path for your(s) page_log files in "$tab_fic_page_log"
+    -> (if you want) Set the url of your CUPS Web Server in "$serveurWebCups"
+    -> (if you want) Set the LDAP server and the LDAP Base DN for the users groups in "$serveurLdap" and  "$racineLdap"
+    -> (if you want) Regroup user(s) in "$tabUserRegroupe"
+    -> (if you want) Regroup printer(s) in "$tabPrinterRegroupe"
+    -> (if you want) Regroup service(s) in "$tabServices"
+    -> (if you want) Set the A4 page cost by printer in "$tabCoutPageA4"
+
+3 - Execute "/index.php" with your Web Server and wait few seconds ...
+
